@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scan RFID</title>
+</head>
+<body>
+  <h1>Scan your RFID</h1>
+  <p>UID: <span id="uidDisplay">Waiting for UID...</span></p>
+  <p id="timestampContainer" style="display:none;">Timestamp: <span id="timestampDisplay"></span></p>
+  <div id="userData"></div>
+
+  <script>
+    async function fetchUID() {
+      try {
+        const response = await fetch('/latest-uid');
+        const data = await response.json();
+        if (data.uid) {
+          document.getElementById('uidDisplay').textContent = data.uid;
+          document.getElementById('timestampDisplay').textContent = data.timestamp;
+          document.getElementById('timestampContainer').style.display = 'block';
+          fetchUserData(data.uid);
+        }
+      } catch (error) {
+        console.error('Error fetching UID:', error);
+      }
+    }
+
+    async function fetchUserData(uid) {
+      try {
+        const response = await fetch('/project/backend/uid?uid=' + uid);
+        const data = await response.json();
+        if (data.error) {
+          document.getElementById('userData').innerHTML = '<p>' + data.error + '</p>';
+          document.getElementById('timestampContainer').style.display = 'none';
+        } else {
+          document.getElementById('userData').innerHTML = 
+            '<p>Name: ' + data.name + '</p>' +
+            '<p>Email: ' + data.email + '</p>';
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+
+    // Fetch UID once on page load
+    fetchUID();
+  </script>
+</body>
+</html>
