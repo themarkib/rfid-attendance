@@ -15,7 +15,7 @@ const UpdateUserForm = ({ user, onUpdate, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(formData);
+    onUpdate(formData); // Notify parent component to update user
   };
 
   return (

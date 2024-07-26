@@ -5,6 +5,7 @@ const AddForm = () => {
   const [formData, setFormData] = useState({
     cardid: '',
     name: '',
+    email: '',
     phoneNo: '',
   });
 
@@ -19,7 +20,7 @@ const AddForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/add-user', { // Update with your actual API endpoint
+      const response = await fetch('http://localhost:3000/api/add-user', { // URL for the backend
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,6 +33,7 @@ const AddForm = () => {
         setFormData({
           cardid: '',
           name: '',
+          email: '',
           phoneNo: '',
         }); // Reset form
       } else {
@@ -67,6 +69,17 @@ const AddForm = () => {
             id="name"
             name="name"
             value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
           />

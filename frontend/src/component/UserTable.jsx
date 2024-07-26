@@ -5,15 +5,14 @@ const UserTable = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Simulate an API call
     const fetchData = async () => {
-      // Dummy data
-      const dummyData = [
-        { idno: 1, cardid: '1234', name: 'John Doe', contactno: '9876543210' },
-        { idno: 2, cardid: '5678', name: 'Jane Smith', contactno: '1234567890' },
-        // Add more rows as needed
-      ];
-      setData(dummyData);
+      try {
+        const response = await fetch('http://localhost:3000/users');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
@@ -34,10 +33,10 @@ const UserTable = () => {
         <tbody>
           {data.map((entry) => (
             <tr key={entry.idno}>
-              <td>{entry.idno}</td>
-              <td>{entry.cardid}</td>
+              <td>{entry.userid}</td>
+              <td>{entry.card_id}</td>
               <td>{entry.name}</td>
-              <td>{entry.contactno}</td>
+              <td>{entry.phone}</td>
             </tr>
           ))}
         </tbody>

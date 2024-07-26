@@ -60,7 +60,101 @@ app.post('/login', (req, res) => {
 
 
 // Serve static files from the 'public' folder
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Endpoint to fetch attendance data
+app.get('/attendance', (req, res) => {
+  const query = 'SELECT id, name, card_id, date, time_in, time_out FROM attendance_log';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      res.status(500).json({ error: 'Failed to fetch data' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Endpoint to fetch user data
+app.get('/users', (req, res) => {
+  const query = 'SELECT  userid,card_id,name,phone FROM users';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      res.status(500).json({ error: 'Failed to fetch data' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
+// POST endpoint to add user
+app.post('/api/add-user', (req, res) => {
+  const { cardid, name, email, phoneNo } = req.body;
+
+  const query = 'INSERT INTO users (card_id, name, email, phone) VALUES (?, ?, ?, ?)';
+  const values = [cardid, name, email, phoneNo];
+
+  db.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error inserting data:', err);
+      return res.status(500).json({ message: 'Failed to add user.' });
+    }
+    res.status(200).json({ message: 'User added successfully!' });
+  });
+});
+
+// GET endpoint to fetch users
+app.get('/api/users', (req, res) => {
+  const query = 'SELECT userid, card_id, name, phone FROM users';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data:', err);
+      return res.status(500).json({ message: 'Failed to fetch users.' });
+    }
+    res.status(200).json(results);
+  });
+});
+
+// DELETE endpoint to remove a user
+app.delete('/api/users/:idno', (req, res) => {
+  const { idno } = req.params;
+
+  const query = 'DELETE FROM users WHERE userid = ?';
+  
+  db.query(query, [idno], (err, results) => {
+    if (err) {
+      console.error('Error deleting user:', err);
+      return res.status(500).json({ message: 'Failed to delete user.' });
+    }
+    res.status(200).json({ message: 'User deleted successfully!' });
+  });
+});
+
+
+// PUT endpoint to update user
+app.put('/api/users/:idno', (req, res) => {
+  const { idno } = req.params;
+  const { cardid, name, contactno } = req.body;
+
+  const query = `
+    UPDATE users
+    SET card_id = ?, name = ?, phone = ?
+    WHERE userid = ?
+  `;
+
+  db.query(query, [cardid, name, contactno, idno], (err, results) => {
+    if (err) {
+      console.error('Error updating user:', err);
+      return res.status(500).json({ message: 'Failed to update user.' });
+    }
+    res.status(200).json({ message: 'User updated successfully!' });
+  });
+});
+
 
 // Endpoint to get the latest UID
 app.get('/latest-uid', (req, res) => {
@@ -159,7 +253,7 @@ app.post('/project/backend/add-user', (req, res) => {
   }
 
   // Check if the UID already exists
-  const checkSql = 'SELECT * FROM users WHERE uid = ?';
+  const checkSql = 'SELECT * FROM users WHERE userid = ?';
   db.query(checkSql, [uid], (err, results) => {
     if (err) {
       console.error('Error executing MySQL query:', err);

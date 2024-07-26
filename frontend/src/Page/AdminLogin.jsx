@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './../pageCss/AdminLogin.css';
 
 const AdminLogin = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/login', {
+            const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -18,7 +20,8 @@ const AdminLogin = ({ onLogin }) => {
             });
             const data = await response.json();
             if (response.ok) {
-                onLogin();
+                // onLogin();
+                navigate('/admin-home');
             } else {
                 setError(data.message || 'Invalid credentials');
             }

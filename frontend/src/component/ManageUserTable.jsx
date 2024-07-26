@@ -7,31 +7,61 @@ const ManageUserTable = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Simulate an API call
     const fetchData = async () => {
-      // Dummy data
-      const dummyData = [
-        { idno: 1, cardid: '1234', name: 'John Doe', contactno: '9876543210' },
-        { idno: 2, cardid: '5678', name: 'Jane Smith', contactno: '1234567890' },
-        // Add more rows as needed
-      ];
-      setData(dummyData);
+      try {
+        const response = await fetch('http://localhost:3000/api/users');
+        if (response.ok) {
+          const users = await response.json();
+          setData(users);
+        } else {
+          console.error('Failed to fetch users.');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
   }, []);
 
-  const handleUpdate = (user) => {
-    // Implement update functionality
-    console.log('Updating user:', user);
-    setData(data.map(entry => (entry.idno === user.idno ? user : entry)));
-    setCurrentUser(null);
+  const handleUpdate = async (updatedUser) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/${updatedUser.userid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (response.ok) {
+        const newUser = await response.json();
+        setData(data.map(entry => (entry.userid === newUser.userid ? newUser : entry)));
+        setCurrentUser(null);
+        console.log('User updated successfully!');
+      } else {
+        console.error('Failed to update user.');
+      }
+    } catch (error) {
+      console.error('Error updating data:', error);
+    }
   };
 
-  const handleDelete = (idno) => {
-    // Implement delete functionality
-    console.log('Deleting user with ID:', idno);
-    setData(data.filter(entry => entry.idno !== idno)); // Remove from UI for now
+  const handleDelete = async (idno) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/${idno}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setData(data.filter(entry => entry.userid !== idno)); // Remove from UI
+        console.log('User deleted successfully!');
+      } else {
+        console.error('Failed to delete user.');
+      }
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
   };
 
   const handleCancelUpdate = () => {
@@ -44,23 +74,23 @@ const ManageUserTable = () => {
       <table className="manage-user-table">
         <thead>
           <tr>
-            <th>ID No</th>
+            <th>ID</th>
             <th>Card ID</th>
             <th>Name</th>
-            <th>Contact No</th>
+            <th>Phone</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.map((entry) => (
-            <tr key={entry.idno}>
-              <td>{entry.idno}</td>
-              <td>{entry.cardid}</td>
+            <tr key={entry.userid}>
+              <td>{entry.userid}</td>
+              <td>{entry.card_id}</td>
               <td>{entry.name}</td>
-              <td>{entry.contactno}</td>
+              <td>{entry.phone}</td>
               <td className="actions">
                 <button className="update-button" onClick={() => setCurrentUser(entry)}>Update</button>
-                <button className="delete-button" onClick={() => handleDelete(entry.idno)}>Delete</button>
+                <button className="delete-button" onClick={() => handleDelete(entry.userid)}>Delete</button>
               </td>
             </tr>
           ))}
