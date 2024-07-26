@@ -19,7 +19,7 @@ app.use(bodyParser.json()); // Middleware to parse JSON bodies (for POST request
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 const SECRET_KEY = 'bikram'; // Replace with your actual secret key
@@ -75,43 +75,6 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
-// // Login endpoint
-// app.post('/login', (req, res) => {
-//   const { username, password } = req.body;
-
-//   if (!username || !password) {
-//     return res.status(400).json({ message: 'Username and password are required' });
-//   }
-
-//   // Query to find user by username
-//   db.query('SELECT * FROM admin WHERE username = ?', [username], (err, results) => {
-//     if (err) {
-//       return res.status(500).json({ message: 'Database error' });
-//     }
-//     if (results.length === 0) {
-//       return res.status(401).json({ message: 'Invalid username or password' });
-//     }
-
-//     const user = results[0];
-
-//     // Compare password with hashed password in the database
-//     bcrypt.compare(password, user.password, (err, isMatch) => {
-//       if (err) {
-//         return res.status(500).json({ message: 'Error comparing passwords' });
-//       }
-//       if (!isMatch) {
-//         return res.status(401).json({ message: 'Invalid username or password' });
-//       }
-
-//       // Successful login
-//       res.json({ message: 'Login successful' });
-//     });
-//   });
-// });
-
-
-
 
 // Serve static files from the 'public' folder
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -333,7 +296,7 @@ app.post('/project/backend/add-user', (req, res) => {
 
 // Handle 404 - Keep this as the last route
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, '../frontend', '404.html'));
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 // Start the server
