@@ -1,0 +1,55 @@
+/* UpdateUserForm.css */
+.update-form-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .update-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .update-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .update-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .update-form .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .update-form button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .update-form button[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+  }
+  
+  .update-form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .update-form .cancel-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .update-form .cancel-button:hover {
+    background-color: #c82333;
+  }
+  

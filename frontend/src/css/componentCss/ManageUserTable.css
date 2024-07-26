@@ -1,0 +1,57 @@
+/* ManageUserTable.css */
+.manage-user-container {
+    margin: 20px;
+}
+
+.manage-user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.manage-user-table th, .manage-user-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.manage-user-table th {
+    background-color: #f4f4f4;
+}
+
+.manage-user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.manage-user-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.manage-user-table .actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.manage-user-table .update-button, .manage-user-table .delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.manage-user-table .update-button {
+    background-color: #007BFF;
+    color: white;
+}
+
+.manage-user-table .update-button:hover {
+    background-color: #0056b3;
+}
+
+.manage-user-table .delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.manage-user-table .delete-button:hover {
+    background-color: #c82333;
+}
