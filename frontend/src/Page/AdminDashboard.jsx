@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '../component/NavBar'
+import useAuth from '../hooks/useAuth';
 
 const AdminDashboard = () => {
   return (

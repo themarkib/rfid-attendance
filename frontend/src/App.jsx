@@ -10,13 +10,8 @@ import AdminDashboard from "./Page/AdminDashboard";
 import Home from "./Page/Home";
 import User from "./Page/User";
 import ManageUser from "./Page/ManageUser";
+
 import AddUser from "./Page/AddUser";
-
-
-
-
-
-
 
 
 const App = () => {
@@ -30,6 +25,7 @@ const App = () => {
         <Route path="/admin-home" element={<Home/>} />
         <Route path="/admin-uselog" element={<User/>} />
         <Route path="/admin-manageuser" element={<ManageUser/>} />
+        
         <Route path="/admin-adduser" element={<AddUser/>} />
       </Routes>
 

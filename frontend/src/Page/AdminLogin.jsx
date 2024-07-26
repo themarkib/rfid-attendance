@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './../pageCss/AdminLogin.css';
+import useAuth from '../hooks/useAuth';
 
 const AdminLogin = ({ onLogin }) => {
     const [username, setUsername] = useState('');
@@ -20,7 +21,7 @@ const AdminLogin = ({ onLogin }) => {
             });
             const data = await response.json();
             if (response.ok) {
-                // onLogin();
+                localStorage.setItem('token', data.token); // Store the token
                 navigate('/admin-home');
             } else {
                 setError(data.message || 'Invalid credentials');
