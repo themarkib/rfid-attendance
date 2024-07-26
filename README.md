@@ -1,2 +1,4 @@
 # rfid-attendance
-RFID attendance system using MERN Stack using Arduino Uno,RFID Module and NodeMCU
+RFID attendance system using NodeJS,ReactJS,MySQL using Arduino Uno,RFID Module and NodeMCU.
+
+
