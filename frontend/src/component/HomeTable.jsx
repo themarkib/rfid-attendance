@@ -1,32 +1,71 @@
 import React, { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import './../css/componentCss/HomeTable.css';
 
 const HomeTable = () => {
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const fetchData = async (query = '') => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/search?name=${query}`);
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/attendance');
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    fetchData(searchQuery);
+  };
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const headers = [
+    { label: 'ID No', key: 'id' },
+    { label: 'Name', key: 'name' },
+    { label: 'Card ID', key: 'card_id' },
+    { label: 'Date', key: 'date' },
+    { label: 'Time In', key: 'time_in' },
+    { label: 'Time Out', key: 'time_out' }
+  ];
+
+  const csvData = data.map(entry => ({
+    ...entry,
+    date: formatDate(entry.date)
+  }));
+
   return (
     <div className="home-container">
-      <h1>Attendance Table</h1>
+      <h1>Attendance Log</h1>
+      <div className="search-export-container">
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            placeholder="Search by name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+        <CSVLink
+          data={csvData}
+          headers={headers}
+          filename="attendance_log.csv"
+          className="export-button"
+        >
+          Export as CSV
+        </CSVLink>
+      </div>
       <table className="attendance-table">
         <thead>
           <tr>

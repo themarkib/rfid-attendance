@@ -116,6 +116,16 @@ app.get('/attendance', (req, res) => {
   });
 });
 
+//search filter
+app.get('/api/search', (req, res) => {
+  const { name } = req.query;
+  const sql = 'SELECT * FROM attendance_log WHERE name LIKE ?';
+  db.query(sql, [`%${name}%`], (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
 // Endpoint to fetch user data
 app.get('/users', (req, res) => {
   const query = 'SELECT  userid,card_id,name,phone,gender,email FROM users';
