@@ -1,30 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './../css/componentCss/NavBar.css';
 import useAuth from '../hooks/useAuth';
 
 const NavBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
-    // Clear user-related data (e.g., tokens) from local storage or state
-    localStorage.removeItem('token'); 
-    
-    // Navigate to the login page or a specific logout route
+    localStorage.removeItem('token');
     navigate('/admin');
   };
 
-  // Determine the active path
   const getActiveClass = (path) => location.pathname === path ? 'active' : '';
 
   return (
     <nav className="navbar">
       <div className="navbar-logo-header">
-        {/* */}
         <h1 className="navbar-title">AMS</h1>
+        <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          ☰
+        </button>
       </div>
-      <div className="navbar-navigation">
+      <div className={`navbar-navigation ${isMenuOpen ? 'open' : ''}`}>
         <ul>
           <li className={`navbar-nav-item ${getActiveClass('/admin-home')}`} onClick={() => navigate('/admin-home')}>
             Home

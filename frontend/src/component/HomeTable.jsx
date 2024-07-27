@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CSVLink } from 'react-csv';
+import { Download } from '@mui/icons-material'; // Import the Download icon
 import './../css/componentCss/HomeTable.css';
 
 const HomeTable = () => {
@@ -49,13 +50,13 @@ const HomeTable = () => {
       <h1>Attendance Log</h1>
       <div className="search-export-container">
         <form onSubmit={handleSearch} className="search-form">
+          Search :&nbsp;
           <input
             type="text"
             placeholder="Search by name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button type="submit">Search</button>
         </form>
         <CSVLink
           data={csvData}
@@ -63,6 +64,7 @@ const HomeTable = () => {
           filename="attendance_log.csv"
           className="export-button"
         >
+          <Download fontSize="small" style={{ marginRight: '8px' }} />
           Export as CSV
         </CSVLink>
       </div>

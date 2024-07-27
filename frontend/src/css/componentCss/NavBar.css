@@ -1,70 +1,109 @@
-/* NavBar.css */
+/* Base styles for the NavBar */
 .navbar {
-    display: flex;
-    flex-direction: column;
-    background-color: #2c3e50;
-    color: white;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Ensures padding is included in the total width */
-    margin-bottom: 100px; /* Increased margin at the bottom */
-  }
-  
-  .navbar .navbar-logo-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .navbar .navbar-title {
-    font-size: 18px;
-    margin: 0;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  background-color: #2c3e50;
+  color: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin-bottom: 100px;
+}
+
+.navbar .navbar-logo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .navbar-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.navbar .navbar-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar .navbar-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+
+.navbar .navbar-navigation ul li {
+  padding: 10px 15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.navbar .navbar-navigation ul li.active {
+  background-color: #2980b9;
+  border-radius: 4px;
+}
+
+.navbar .navbar-navigation ul li:hover {
+  background-color: #2980b9;
+  border-radius: 4px;
+}
+
+.navbar .logout-item {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 4px;
+}
+
+.navbar .logout-item:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
   .navbar .navbar-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
   }
-  
+
   .navbar .navbar-navigation ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    justify-content: space-around; /* Distributes items evenly */
+    flex-direction: row;
+    justify-content: space-around;
     overflow-x: auto; /* Allows horizontal scrolling if necessary */
   }
-  
-  .navbar .navbar-navigation ul li {
-    padding: 10px 15px; /* Adjusted padding */
-    cursor: pointer;
-    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+/* Add styles for the menu toggle button */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Show the menu toggle button on small screens */
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
   }
-  
-  .navbar .navbar-navigation ul li.active {
-    background-color: #2980b9;
-    border-radius: 4px;
+
+  .navbar .navbar-navigation {
+    display: none;
+    flex-direction: column;
   }
-  
-  .navbar .navbar-navigation ul li:hover {
-    background-color: #2980b9;
-    border-radius: 4px;
+
+  .navbar .navbar-navigation.open {
+    display: flex;
   }
-  
-  .navbar .logout-item {
-    background-color: #e74c3c;
-    color: white;
-    border-radius: 4px;
-  }
-  
-  .navbar .logout-item:hover {
-    background-color: #c0392b;
-  }
-  
+}
+

@@ -1,6 +1,6 @@
-// src/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, Card, CardContent, Typography } from '@mui/material';
+import { School, CheckCircle, Cancel } from '@mui/icons-material'; // Import Material-UI icons
 import axios from 'axios';
 
 const Dashboard = () => {
@@ -21,9 +21,24 @@ const Dashboard = () => {
   }, []);
 
   const metricCards = [
-    { title: 'Total Students', value: metrics.totalStudents, color: '#007bff' },
-    { title: 'Present Students', value: metrics.presentStudents, color: '#17a2b8' },
-    { title: 'Absent Students', value: metrics.absentStudents, color: '#28a745' }
+    { 
+      title: 'Total Students', 
+      value: metrics.totalStudents, 
+      color: '#007bff',
+      icon: <School fontSize="large" /> // Icon for Total Students
+    },
+    { 
+      title: 'Present Students', 
+      value: metrics.presentStudents, 
+      color: '#17a2b8',
+      icon: <CheckCircle fontSize="large" /> // Icon for Present Students
+    },
+    { 
+      title: 'Absent Students', 
+      value: metrics.absentStudents, 
+      color: '#28a745',
+      icon: <Cancel fontSize="large" /> // Icon for Absent Students
+    }
   ];
 
   return (
@@ -35,13 +50,16 @@ const Dashboard = () => {
         {metricCards.map((metric, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Card sx={{ backgroundColor: metric.color, color: '#fff' }}>
-              <CardContent>
-                <Typography variant="h6" component="div">
-                  {metric.title}
-                </Typography>
-                <Typography variant="h4" component="div">
-                  {metric.value}
-                </Typography>
+              <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                {metric.icon}
+                <div>
+                  <Typography variant="h6" component="div">
+                    {metric.title}
+                  </Typography>
+                  <Typography variant="h4" component="div">
+                    {metric.value}
+                  </Typography>
+                </div>
               </CardContent>
             </Card>
           </Grid>
