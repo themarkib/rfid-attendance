@@ -2,6 +2,7 @@ import React from 'react';
 import HomeTable from '../component/HomeTable';
 import NavBar from '../component/NavBar';
 import useAuth from '../hooks/useAuth'; // Adjust the import path as needed
+import Dashboard from '../component/Dashboard';
 
 const Home = () => {
     const isAuthenticated = useAuth();
@@ -14,6 +15,7 @@ const Home = () => {
     return (
         <div>
             <NavBar />
+            <Dashboard/>
             <HomeTable />
         </div>
     );

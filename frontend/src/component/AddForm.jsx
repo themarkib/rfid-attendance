@@ -7,6 +7,7 @@ const AddForm = () => {
     name: '',
     email: '',
     phoneNo: '',
+    gender: 'Other', // Default value for gender
   });
 
   const [error, setError] = useState('');
@@ -35,6 +36,7 @@ const AddForm = () => {
           name: '',
           email: '',
           phoneNo: '',
+          gender: 'Other', // Reset gender
         }); // Reset form
       } else {
         const errorData = await response.json();
@@ -48,7 +50,7 @@ const AddForm = () => {
   return (
     <div className="form-container">
       <form className="add-form" onSubmit={handleSubmit}>
-        <h2>Add User</h2>
+        <h2>Add Student</h2>
         {success && <p className="success">{success}</p>}
         {error && <p className="error">{error}</p>}
         <div className="form-group">
@@ -74,6 +76,20 @@ const AddForm = () => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            required
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -95,6 +111,7 @@ const AddForm = () => {
             required
           />
         </div>
+     
         <button type="submit">Submit</button>
       </form>
     </div>

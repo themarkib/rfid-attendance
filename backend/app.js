@@ -77,6 +77,31 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+// Dashboard
+app.get('/api/metrics', (req, res) => {
+  const queries = {
+    totalStudents: 'SELECT COUNT(*) as count FROM users;',
+    presentStudents: 'SELECT COUNT(*) as count FROM attendance_log WHERE DATE(date) = CURDATE();'
+  };
+
+  const metrics = {};
+
+  const queryKeys = Object.keys(queries);
+  let completedQueries = 0;
+
+  queryKeys.forEach(key => {
+    db.query(queries[key], (err, result) => {
+      if (err) throw err;
+      metrics[key] = result[0].count;
+      completedQueries++;
+      if (completedQueries === queryKeys.length) {
+        metrics.absentStudents = metrics.totalStudents - metrics.presentStudents;
+        res.send(metrics);
+      }
+    });
+  });
+});
+
 
 // Endpoint to fetch attendance data
 app.get('/attendance', (req, res) => {
@@ -170,6 +195,7 @@ app.put('/api/users/:idno', (req, res) => {
     res.status(200).json({ message: 'User updated successfully!' });
   });
 });
+
 
 
 // Endpoint to get the latest UID

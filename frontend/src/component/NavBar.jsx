@@ -30,13 +30,13 @@ const NavBar = () => {
             Home
           </li>
           <li className={`navbar-nav-item ${getActiveClass('/admin-uselog')}`} onClick={() => navigate('/admin-uselog')}>
-            User
+            Students
           </li>
           <li className={`navbar-nav-item ${getActiveClass('/admin-adduser')}`} onClick={() => navigate('/admin-adduser')}>
-            Add User
+            Add Student
           </li>
           <li className={`navbar-nav-item ${getActiveClass('/admin-manageuser')}`} onClick={() => navigate('/admin-manageuser')}>
-            Manage User
+            Manage Students
           </li>
           <li className="navbar-nav-item logout-item" onClick={handleLogout}>
             Log Out

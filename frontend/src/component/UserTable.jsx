@@ -27,6 +27,8 @@ const UserTable = () => {
             <th>ID No</th>
             <th>Card ID</th>
             <th>Name</th>
+            <th>Gender</th>
+            <th>Email</th>
             <th>Contact No</th>
           </tr>
         </thead>
@@ -36,6 +38,8 @@ const UserTable = () => {
               <td>{entry.userid}</td>
               <td>{entry.card_id}</td>
               <td>{entry.name}</td>
+              <td>{entry.gender}</td>
+              <td>{entry.email}</td>
               <td>{entry.phone}</td>
             </tr>
           ))}

@@ -1,61 +1,60 @@
-/* AddForm.css */
 .form-container {
-    width: 400px; /* Increased width */
-    margin: 250px auto; /* Increased margin from top */
-    padding: 50px; /* Increased padding */
-    border: 1px solid #ccc;
-    border-radius: 6px; /* Slightly increased border-radius */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increased shadow for a more pronounced effect */
+  width: 400px; /* Increased width */
+  margin: 150px auto; /* Increased margin from top */
+  padding: 50px; /* Increased padding */
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Slightly increased border-radius */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increased shadow for a more pronounced effect */
+}
+
+.add-form h2 {
+  margin-bottom: 45px; /* Increased margin below the header */
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px; /* Increased margin between form fields */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px; /* Increased margin below labels */
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px; /* Increased padding inside input and select fields */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px; /* Increased padding for the button */
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .form-container {
+    width: 90%; /* Ensures the form is still appropriately sized on smaller screens */
+    padding: 20px; /* Adjust padding for smaller screens */
   }
-  
-  .add-form h2 {
-    margin-bottom: 45px; /* Increased margin below the header */
-    text-align: center;
-  }
-  
-  .form-group {
-    margin-bottom: 20px; /* Increased margin between form fields */
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 7px; /* Increased margin below labels */
-    font-weight: bold;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px; /* Increased padding inside input fields */
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
+
   button {
-    width: 100%;
-    padding: 12px; /* Increased padding for the button */
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
+    padding: 10px; /* Adjust button padding for smaller screens */
   }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 600px) {
-    .form-container {
-      width: 90%; /* Ensures the form is still appropriately sized on smaller screens */
-      padding: 20px; /* Adjust padding for smaller screens */
-    }
-  
-    button {
-      font-size: 14px;
-      padding: 10px; /* Adjust button padding for smaller screens */
-    }
-  }
-  
+}
